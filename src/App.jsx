@@ -7,6 +7,9 @@ import ProductsHome from "./components/ProductsHome";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Foter from "./components/Foter";
+import Modal from "./components/Modal";
+import Midweb from "./components/Midweb";
+import Endweb from "./components/Endweb";
 
 export default function App() {
   const [data, setData] = useState(false);
@@ -31,13 +34,16 @@ if (!data) {
     <>
       <BrowserRouter>
         <Header />
+        <Modal/>
+        
        
 
         <Routes>
           <Route path="/" element={<div>
             
-          
+            <Midweb/>
             <Home data={data} />
+            <Endweb/>
             </div>
 
             

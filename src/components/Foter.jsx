@@ -37,6 +37,7 @@ export default function Foter() {
             <li className="hover:underline cursor-pointer">Blog</li>
             <li className="hover:underline cursor-pointer">Press</li>
             <li className="hover:underline cursor-pointer">Contact</li>
+            
           </ul>
         </div>
 

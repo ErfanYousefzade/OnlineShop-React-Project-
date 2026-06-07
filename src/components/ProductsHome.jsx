@@ -12,7 +12,7 @@ export default function ProductsHome() {
   return (
     <>
     
-      <div className="box grid grid-cols-1 md:grid-cols-5 gap-6 px-9 mt-[40px]">
+      <div className="box grid grid-cols-1 md:grid-cols-5 gap-6 px-9 mt-[40px] pb-16 mb-20">
         {data.map((item) => (
           <Products
             key={item.id}
@@ -20,6 +20,9 @@ export default function ProductsHome() {
             title={item.title}
             image={item.image}
             price={item.price}
+            description={item.description}
+
+           
           />
         ))}
       </div>
