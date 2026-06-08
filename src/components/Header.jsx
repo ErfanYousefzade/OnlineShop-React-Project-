@@ -25,9 +25,12 @@ export default function Header() {
               Products
             </Link>
           </li>
-          <li className="hover:text-blue-900 transition ">
-            <a href="#">About</a>
+          <li>
+            <Link to="/About" className="hover:text-blue-900 transition">
+              About
+            </Link>
           </li>
+
           <li className="hover:text-blue-900 transition ">
             <a href="#">Helps</a>
           </li>

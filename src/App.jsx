@@ -10,6 +10,7 @@ import Foter from "./components/Foter";
 import Modal from "./components/Modal";
 import Midweb from "./components/Midweb";
 import Endweb from "./components/Endweb";
+import About from "./pages/About";
 
 export default function App() {
   const [data, setData] = useState(false);
@@ -51,6 +52,7 @@ if (!data) {
           <Route path="/Products" element={<ProductsHome />} />
           <Route path="/single-product/:id" element={<SingelProduct />} />
           <Route path="/Admin" element={<Admin/>}/>
+          <Route path="/About" element={<About/>}/>
           
           
         </Routes>

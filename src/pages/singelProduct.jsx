@@ -10,13 +10,15 @@ export default function SingelProduct() {
   }, []);
   return (
     <>
-      <div className="box w-[30%] mx-auto mt-20   shadow-xl relative ">
+      <div className="box w-[90%] md:w-[50%] mx-auto mt-20   shadow-xl relative h-[600px]  mb-20">
         <img
           src={data.image}
           alt=""
-          className="h-[400px] aspect-asuare object-contain w-full mx-auto"
+          className="h-[400px] aspect-asuare object-contain w-full mx-auto mb-[-40px] md:mb-0"
         />
-        <h1 className="font-bold">{data.title}</h1>
+        <h1 className="font-bold mt-[20px]">{data.title}</h1>
+        <p className="mt-3 pl-2 line-clamp-2">{data.description}</p>
+       <p className="mt-2 pl-2 text-zinc-200">{data.category}</p>
         <a className="text-red-700 pt-10 line-through pl-2">
           ${data.price}
         </a>
