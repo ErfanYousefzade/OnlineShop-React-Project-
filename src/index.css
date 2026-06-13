@@ -2,3 +2,10 @@
 .p12{
     color: #4f1623;
 }
+body {
+  @apply bg-white text-black;
+}
+
+.dark body {
+  @apply bg-black text-white;
+}

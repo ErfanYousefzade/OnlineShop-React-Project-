@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import ThemeContext from "../Contexts/ThemContext";
 
 export default function Header() {
   const [open, setOpen] = useState();
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
+   
 
   return (
     <header className="w-full bg-slate-900 text-white shadow-lg border-b border-b-slate-600 ">
-      {/* desktop*/}
-      <nav className="hidden md:flex container  px-46 h-16 items-center justify-between">
+      <nav className="hidden md:flex   w-[80%] mx-auto h-16 items-center justify-between">
         <div className="flex gap-9 font-medium">
           <button className="px-4 py-2 rounded-lg hover:bg-slate-600 transition">
             Cart
@@ -17,6 +21,7 @@ export default function Header() {
               Admin
             </button>
           </Link>
+     
         </div>
 
         <ul className="flex items-center gap-10 font-medium ">
@@ -40,7 +45,6 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* mobile*/}
       <nav className="md:hidden flex items-center justify-between px-4 h-16 r">
         <button
           onClick={() => setOpen(!open)}
@@ -59,7 +63,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/*menu*/}
       {open && (
         <div className="md:hidden border-t bg-slate-900 p-6">
           <ul className="flex flex-col items-center gap-5 font-medium">
@@ -83,6 +86,7 @@ export default function Header() {
           </ul>
         </div>
       )}
+      
     </header>
   );
 }
