@@ -1,19 +1,20 @@
-import Foter from "./components/Foter";
 import Header from "./components/Header";
-import { useContext } from "react";
-
-import ThemeContext from "./Contexts/ThemContext";
+import Foter from "./components/Foter";
+import Timer from "./components/Timer";
 
 export default function Layout({ children }) {
-  const { darkMode } = useContext(ThemeContext);
-
   return (
-    <>
-      <Header />
+    <div className="min-h-screen flex flex-col items-center bg-slate-100">
+      <div className="w-full max-w-screen-2xl">
+        <Header />
+        
 
-      {children}
+        <main className="flex-1">
+          {children}
+        </main>
 
-      <Foter />
-    </>
+        <Foter />
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Products from "../components/Products";
+import Hero from "../components/Hero";
+import Timer from "../components/Timer";
 
 export default function Home({ data }) {
   const [page, setPage] = useState(0);
@@ -10,7 +12,6 @@ export default function Home({ data }) {
 
   const randomProducts = [...data].slice(0, 8);
 
-  // تشخیص موبایل ساده (responsive واقعی)
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
 
@@ -44,10 +45,20 @@ export default function Home({ data }) {
 
   return (
     <>
-      <h1 className="text-red-600 font-bold text-[30px] flex justify-end md:px-10 mb-10 text-center pr-5 md:pr-8">
+      {/* HERO (بالای همه) */}
+      <Hero />
+
+      {/* TIMER (زیر هیرو) */}
+      <div className="mt-10">
+        <Timer />
+      </div>
+
+      {/* TITLE */}
+      <h1 className="text-red-600 font-bold text-[30px] flex justify-end md:px-10 mb-10 text-center pr-5 md:pr-8 mt-12">
         محصولات پر فروش
       </h1>
 
+      {/* PRODUCTS SLIDER */}
       <div className="relative px-6 md:px-9">
         {/* LEFT BUTTON */}
         <button

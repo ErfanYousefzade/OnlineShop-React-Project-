@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Products from "./components/Products";
 import SingelProduct from "./pages/SingelProduct";
 import ProductsHome from "./components/ProductsHome";
@@ -8,16 +8,22 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Foter from "./components/Foter";
 import Modal from "./components/Modal";
-import Midweb from "./components/Midweb";
+
 import Endweb from "./components/Endweb";
 import About from "./pages/About";
 //import ThemeContext from "./contexts/ThemeContext";
 import ThemeContext from "./Contexts/ThemContext";
 import Layout from "./Layout";
+import CartContext from "./Contexts/CartContext";
+
+import CartItem from "./pages/CartItem";
+
+
 
 export default function App() {
   const [data, setData] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [Cart, SetCart] = useState([]);
   useEffect(() => {
     const saved = localStorage.getItem("darkMode");
     if (saved) setDarkMode(JSON.parse(saved));
@@ -32,6 +38,25 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+  const addToCart = useCallback(
+    (id) => {
+      const foundindex = Cart.findIndex((item) => item.id === id);
+      if (foundindex == -1) {
+        SetCart([
+          ...Cart,
+          {
+            id,
+            quantity: 1,
+          },
+        ]);
+      } else {
+        const Copy = structuredClone(Cart);
+        Copy[foundindex].quantity++;
+        SetCart(Copy);
+      }
+    },
+    [Cart],
+  );
   console.log(data);
 
   if (!data) {
@@ -45,7 +70,7 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+        <CartContext.Provider value={{ Cart, SetCart, addToCart }}>
           <Layout>
             <Modal />
 
@@ -54,8 +79,10 @@ export default function App() {
                 path="/"
                 element={
                   <div>
-                    <Midweb />
                     <Home data={data} />
+                    
+                    
+                    
                     <Endweb />
                   </div>
                 }
@@ -64,9 +91,12 @@ export default function App() {
               <Route path="/single-product/:id" element={<SingelProduct />} />
               <Route path="/Admin" element={<Admin />} />
               <Route path="/About" element={<About />} />
+              
+              <Route path="/CartItem" element={<CartItem/>}/>
+              
             </Routes>
           </Layout>
-        </ThemeContext.Provider>
+        </CartContext.Provider>
       </BrowserRouter>
     </>
   );
