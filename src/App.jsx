@@ -17,6 +17,7 @@ import Layout from "./Layout";
 import CartContext from "./Contexts/CartContext";
 
 import CartItem from "./pages/CartItem";
+import Helps from "./pages/Help";
 
 
 
@@ -91,6 +92,7 @@ export default function App() {
               <Route path="/single-product/:id" element={<SingelProduct />} />
               <Route path="/Admin" element={<Admin />} />
               <Route path="/About" element={<About />} />
+              <Route path="/Helps" element={<Helps/>}/>
               
               <Route path="/CartItem" element={<CartItem/>}/>
               
