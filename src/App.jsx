@@ -18,9 +18,16 @@ import CartContext from "./Contexts/CartContext";
 
 import CartItem from "./pages/CartItem";
 import Helps from "./pages/Help";
+import AdminPanel from "./pages/AdminPanel";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+    },
+  },
+});
 export default function App() {
   const [data, setData] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -29,10 +36,6 @@ export default function App() {
     const saved = localStorage.getItem("darkMode");
     if (saved) setDarkMode(JSON.parse(saved));
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -71,34 +74,37 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <CartContext.Provider value={{ Cart, SetCart, addToCart }}>
-          <Layout>
-            <Modal />
+        <QueryClientProvider client={queryClient}>
+          <CartContext.Provider value={{ Cart, SetCart, addToCart }}>
+            <Layout>
+              <Modal />
 
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <div>
-                    <Home data={data} />
-                    
-                    
-                    
-                    <Endweb />
-                  </div>
-                }
-              />
-              <Route path="/Products" element={<ProductsHome data={data} />} />
-              <Route path="/single-product/:id" element={<SingelProduct />} />
-              <Route path="/Admin" element={<Admin />} />
-              <Route path="/About" element={<About />} />
-              <Route path="/Helps" element={<Helps/>}/>
-              
-              <Route path="/CartItem" element={<CartItem/>}/>
-              
-            </Routes>
-          </Layout>
-        </CartContext.Provider>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <div>
+                      <Home data={data} />
+
+                      <Endweb />
+                    </div>
+                  }
+                />
+                <Route
+                  path="/Products"
+                  element={<ProductsHome data={data} />}
+                />
+                <Route path="/single-product/:id" element={<SingelProduct />} />
+                <Route path="/Admin" element={<Admin />} />
+                <Route path="/About" element={<About />} />
+                <Route path="/Helps" element={<Helps />} />
+
+                <Route path="/CartItem" element={<CartItem />} />
+                <Route path="/AdminPanel" element={<AdminPanel />} />
+              </Routes>
+            </Layout>
+          </CartContext.Provider>
+        </QueryClientProvider>
       </BrowserRouter>
     </>
   );

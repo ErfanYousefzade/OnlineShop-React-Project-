@@ -1,45 +1,75 @@
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+
 export default function Admin() {
+  const navigate = useNavigate();
+  const { handleSubmit, register, reset } = useForm();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data) =>
+      fetch("https://fakestoreapi.com/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json()),
+
+    onSuccess: (data) => {
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/AdminPanel");
+      } else {
+        alert("login failed");
+      }
+    },
+
+    onError: () => {
+      reset();
+      alert("error logging in");
+    },
+  });
+
+  const handleLogin = (data) => {
+    mutate(data);
+  };
+
   return (
     <div
-      className="min-h-screen flex items-center justify-center "
+      className="min-h-screen flex items-center justify-center"
       style={{
         backgroundImage: "url('/download.jpg')",
       }}
     >
-      <div className=" md:w-[32%] w-[50%] bg-black/90 rounded-2xl shadow-2xl p-10">
+      <div className="md:w-[32%] w-[50%] bg-black/90 rounded-2xl shadow-2xl p-10">
         <h1 className="text-3xl font-bold text-center text-white mb-8">
           Login
         </h1>
 
-        <form className="">
+        <form onSubmit={handleSubmit(handleLogin)}>
           <input
+            {...register("username")}
             type="text"
             placeholder="Username"
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 outline-none focus:border-purple-500 transition mb-4"
+            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white mb-4"
           />
 
           <input
+            {...register("password")}
             type="password"
             placeholder="Password"
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 outline-none focus:border-purple-500 transition mb-3"
+            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white mb-4"
           />
 
           <button
-            
-            className="w-full py-3 bg-purple-700 text-white font-semibold rounded-lg transition duration-300 hover:bg-green-600"
+            type="submit"
+            disabled={isPending}
+            className="w-full py-3 bg-purple-700 text-white font-semibold rounded-lg hover:bg-green-600"
           >
-            Login
+            {isPending ? "Loading..." : "Login"}
           </button>
         </form>
-
-        <div className="text-center mt-5">
-          <a
-            href="https://www.vecteezy.com/free-png/face-password"
-            className="text-purple-400 hover:text-green-400 transition "
-          >
-            Forgot Password?
-          </a>
-        </div>
       </div>
     </div>
   );
