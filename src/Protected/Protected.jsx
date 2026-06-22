@@ -1,17 +1,11 @@
-import { useNavigate } from "react-router"
+import { Navigate } from "react-router-dom";
 
-export default function Protected({children}){
-    const isToken=localStorage.getItem("token")
-    const navigate= useNavigate()
+export default function Protected({ children }) {
+  const token = localStorage.getItem("token");
 
-     
-        if (token){
-            {children}
-        }
-        else{
-            navigate("/Admin")
-        }
+  if (!token) {
+    return <Navigate to="/Admin" replace />;
+  }
 
-        
-  
+  return children;
 }

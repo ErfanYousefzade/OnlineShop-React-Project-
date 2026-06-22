@@ -73,7 +73,7 @@ export default function Header() {
           </button>
 
           <h1 className="absolute left-1/2 -translate-x-1/2 font-bold text-lg whitespace-nowrap">
-            Easy Net Shop
+            EYour Shop
           </h1>
 
           <div className="flex items-center gap-3 text-sm">

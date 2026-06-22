@@ -20,6 +20,7 @@ import CartItem from "./pages/CartItem";
 import Helps from "./pages/Help";
 import AdminPanel from "./pages/AdminPanel";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Protected from "./Protected/Protected";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -100,7 +101,15 @@ export default function App() {
                 <Route path="/Helps" element={<Helps />} />
 
                 <Route path="/CartItem" element={<CartItem />} />
-                <Route path="/AdminPanel" element={<AdminPanel />} />
+
+                <Route
+                  path="/AdminPanel"
+                  element={
+                    <Protected>
+                      <AdminPanel />
+                    </Protected>
+                  }
+                />
               </Routes>
             </Layout>
           </CartContext.Provider>

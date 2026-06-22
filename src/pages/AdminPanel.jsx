@@ -463,7 +463,7 @@ function AppShell({ data, isLoading, isError, error, categoryData, totalRevenue,
              E
             </div>
             <span className="text-slate-50 font-semibold text-lg tracking-tight">
-            easy shop<span style={{ color: ACCENT.teal }}>panel</span>
+            EYour Shop<span style={{ color: ACCENT.teal }}>panel</span>
             </span>
           </div>
           <button className="lg:hidden text-slate-400" onClick={() => setSidebarOpen(false)} aria-label="بستن منو">
