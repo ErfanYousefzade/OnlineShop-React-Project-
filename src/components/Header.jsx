@@ -4,11 +4,11 @@ import CartContext from "../Contexts/CartContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { Cart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   const sum = useMemo(() => {
-    return Cart.reduce((acc, cur) => acc + cur.quantity, 0);
-  }, [Cart]);
+    return cart.reduce((acc, cur) => acc + cur.quantity, 0);
+  }, [cart]);
 
   return (
     <header className="w-full bg-slate-900 text-white shadow-lg border-b border-slate-700 relative">
