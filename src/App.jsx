@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import Products from "./components/Products";
-import SingelProduct from "./pages/SingelProduct";
+import SingelProduct from "./pages/singelProduct";
 import ProductsHome from "./components/ProductsHome";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
