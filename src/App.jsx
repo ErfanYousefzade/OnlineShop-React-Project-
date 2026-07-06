@@ -15,7 +15,6 @@ import About from "./pages/About";
 import ThemeContext from "./Contexts/ThemContext";
 import Layout from "./Layout";
 
-
 import CartItem from "./pages/CartItem";
 import Helps from "./pages/Help";
 import AdminPanel from "./pages/AdminPanel";
@@ -44,10 +43,8 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  
 
-  const[cart,Dispatch]=useReducer(MyReducer,[])
-  
+  const [cart, Dispatch] = useReducer(MyReducer, []);
 
   console.log(data);
 
@@ -63,7 +60,7 @@ export default function App() {
     <>
       <BrowserRouter basename="/OnlineShop-React-Project-">
         <QueryClientProvider client={queryClient}>
-          <CartContext.Provider value={{ cart,Dispatch }}>
+          <CartContext.Provider value={{ cart, Dispatch }}>
             <Layout>
               <Modal />
 
