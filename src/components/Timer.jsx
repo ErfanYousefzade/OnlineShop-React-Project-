@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function Timer() {
-  const targetDate = new Date("2026-07-29T23:59:59").getTime();
+  const targetDate = new Date("2026-09-29T23:59:59").getTime();
 
   const calculateTimeLeft = () => {
     const difference = targetDate - new Date().getTime();

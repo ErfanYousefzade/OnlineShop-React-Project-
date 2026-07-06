@@ -39,10 +39,10 @@ export default function Admin() {
     <div
       className="min-h-screen flex items-center justify-center"
       style={{
-        backgroundImage: "url('/download.jpg')",
+        backgroundImage: "url('public/download.jpg')",
       }}
     >
-      <div className="md:w-[32%] w-[50%] bg-black/90 rounded-2xl shadow-2xl p-10">
+      <div className="w-full max-w-md bg-black/90 rounded-2xl shadow-2xl p-10">
         <h1 className="text-3xl font-bold text-center text-white mb-8">
           Login
         </h1>

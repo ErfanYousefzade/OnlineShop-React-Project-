@@ -34,7 +34,7 @@ export default function Endweb() {
         transition={{ duration: 0.8 }}
       >
         <img
-          src="/bale.jpg"
+          src="public/bale.jpg"
           alt="Collection"
           className="
             w-full

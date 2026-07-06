@@ -360,7 +360,7 @@ export default function SingelProduct() {
                 const rDisc = (rp - rp * 0.1).toFixed(2);
                 return (
                   <Link
-                    to={`/product/${p.id}`}
+                    to={`/single-product/${p.id}`}
                     key={p.id}
                     className="group bg-white border border-[#E8E6E0] rounded-sm p-4 hover:border-[#C1440E] transition"
                   >

@@ -104,7 +104,7 @@ export default function Hero() {
           transition={{ duration: 0.9 }}
         >
           <img
-            src="/collection.jpg"
+            src="public/collection.jpg"
             alt="Fashion Collection"
             className="
               w-full

@@ -60,9 +60,11 @@ export default function Header() {
             </ul>
 
             {/* ICON */}
-            <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold">
-              E
-            </div>
+            <Link to="/">
+              <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold">
+                E
+              </div>
+            </Link>
           </div>
         </nav>
 

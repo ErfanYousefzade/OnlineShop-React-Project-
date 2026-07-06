@@ -15,12 +15,7 @@ export default function Products({
 
   useEffect(() => {
     const number = cart.find((item) => item.id === id)?.quantity;
-
-    if (number) {
-      setDisplayNumber(number);
-    } else {
-      setDisplayNumber(0);
-    }
+    setDisplayNumber(number || 0);
   }, [cart, id]);
 
   const finalPrice = (price - price * 0.1).toFixed(2);
@@ -33,21 +28,20 @@ export default function Products({
           h-full
           flex flex-col
           overflow-hidden
-          rounded-2xl
+          rounded-xl
           border
           border-gray-200
           bg-white
           shadow-sm
           transition-all
           duration-300
-          hover:-translate-y-2
-          hover:shadow-2xl
+          hover:-translate-y-1
+          hover:shadow-xl
         "
       >
         {/* IMAGE */}
-        <div className="relative bg-gray-100 h-[260px] flex items-center justify-center p-5">
-          {/* Discount Badge */}
-          <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+        <div className="relative flex items-center justify-center bg-gray-100 h-36 sm:h-48 lg:h-64 p-2 sm:p-4">
+          <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full">
             10% OFF
           </span>
 
@@ -55,55 +49,54 @@ export default function Products({
             src={image}
             alt={title}
             className="
-              h-[200px]
+              max-h-full
+              max-w-full
               object-contain
               transition-transform
               duration-500
-              group-hover:scale-110
+              group-hover:scale-105
             "
           />
         </div>
 
         {/* CONTENT */}
-        <div className="flex flex-col flex-1 p-4">
-
+        <div className="flex flex-col flex-1 p-3 sm:p-4">
           {/* CATEGORY */}
-          <span className="w-fit text-xs font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full capitalize mb-3">
+          <span className="w-fit text-[10px] sm:text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-1 rounded-full capitalize mb-2">
             {category}
           </span>
 
           {/* TITLE */}
-          <h3 className="font-bold text-[17px] text-gray-800 line-clamp-2 min-h-[55px]">
+          <h3 className="font-bold text-sm sm:text-base lg:text-[17px] text-gray-800 line-clamp-2 min-h-[42px] sm:min-h-[50px]">
             {title}
           </h3>
 
           {/* DESCRIPTION */}
-          <p className="text-gray-500 text-sm mt-2 line-clamp-2 min-h-[40px]">
+          <p className="text-gray-500 text-xs sm:text-sm mt-2 line-clamp-2 min-h-[34px] sm:min-h-[40px]">
             {description}
           </p>
 
           {/* PRICE */}
-          <div className="mt-5">
-            <p className="text-sm text-gray-400 line-through">
+          <div className="mt-4">
+            <p className="text-xs sm:text-sm text-gray-400 line-through">
               ${price}
             </p>
 
-            <div className="flex items-center justify-between mt-1">
-              <p className="text-2xl font-bold text-green-600">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-1">
+              <p className="text-lg sm:text-2xl font-bold text-green-600">
                 ${finalPrice}
               </p>
 
-              <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
+              <span className="self-start sm:self-auto text-[10px] sm:text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold whitespace-nowrap">
                 Save 10%
               </span>
             </div>
           </div>
 
           {/* BUTTONS */}
-          <div className="mt-auto pt-5">
+          <div className="mt-auto pt-4">
             {displayNumber > 0 ? (
               <div className="flex items-center justify-between">
-
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -113,11 +106,12 @@ export default function Products({
                     });
                   }}
                   className="
-                    w-11 h-11
+                    w-8 h-8
+                    sm:w-11 sm:h-11
                     rounded-full
                     bg-red-500
                     text-white
-                    text-xl
+                    text-lg
                     transition
                     hover:bg-red-600
                   "
@@ -125,7 +119,7 @@ export default function Products({
                   −
                 </button>
 
-                <span className="text-2xl font-bold">
+                <span className="text-lg sm:text-2xl font-bold">
                   {displayNumber}
                 </span>
 
@@ -138,11 +132,12 @@ export default function Products({
                     });
                   }}
                   className="
-                    w-11 h-11
+                    w-8 h-8
+                    sm:w-11 sm:h-11
                     rounded-full
                     bg-green-500
                     text-white
-                    text-xl
+                    text-lg
                     transition
                     hover:bg-green-600
                   "
@@ -161,16 +156,18 @@ export default function Products({
                 }}
                 className="
                   w-full
-                  rounded-xl
+                  rounded-lg
                   bg-gradient-to-r
                   from-blue-600
                   to-indigo-600
-                  py-3
+                  py-2.5
+                  text-sm
+                  sm:text-base
                   font-semibold
                   text-white
                   transition-all
                   duration-300
-                  hover:scale-[1.03]
+                  hover:scale-[1.02]
                   hover:shadow-lg
                 "
               >

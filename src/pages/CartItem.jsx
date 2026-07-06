@@ -53,7 +53,7 @@ export default function CartItem() {
           دارید.
         </p>
         <Link
-          to="/"
+          to="/Products"
           className="mt-6 bg-[#1A1A1A] text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-[#C1440E] transition"
         >
           مشاهده محصولات
@@ -115,7 +115,7 @@ export default function CartItem() {
                 >
                   {/* image */}
                   <Link
-                    to={`/product/${item.id}`}
+                    to={`/single-product/${item.id}`}
                     className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-[#FAFAF8] border border-[#E8E6E0] rounded-sm grid place-items-center overflow-hidden"
                   >
                     <img

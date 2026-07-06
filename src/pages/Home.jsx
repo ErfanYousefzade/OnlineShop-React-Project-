@@ -76,7 +76,7 @@ export default function Home({ data }) {
     setAnim(true);
     setExpensiveAnim(true);
   }, []);
-console.log("a,nb");
+  console.log("a,nb");
 
   return (
     <>
@@ -89,9 +89,20 @@ console.log("a,nb");
       </div>
 
       {/* محصولات گران‌قیمت */}
-      <h1 className="text-red-600 font-bold text-[30px] flex justify-end md:px-10 mb-10 text-center pr-5 md:pr-8 mt-16">
-        محصولات گران قیمت
-      </h1>
+      <div className="flex justify-end mt-16 mb-10 px-4 md:px-10">
+        <div className="flex items-center gap-4">
+          <div className="w-1 h-10 rounded-full bg-gradient-to-b from-red-500 to-orange-500"></div>
+
+          <div className="text-right">
+            <p className="text-sm text-gray-500 font-medium">محصولات ویژه</p>
+
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+              محصولات
+              <span className="text-red-600"> گران قیمت</span>
+            </h1>
+          </div>
+        </div>
+      </div>
 
       <div className="relative px-6 md:px-9 ">
         <div className="relative w-full max-w-7xl mx-auto ">
