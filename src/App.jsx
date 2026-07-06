@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/OnlineShop-React-Project-">
         <QueryClientProvider client={queryClient}>
           <CartContext.Provider value={{ cart,Dispatch }}>
             <Layout>

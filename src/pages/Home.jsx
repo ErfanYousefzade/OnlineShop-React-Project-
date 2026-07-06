@@ -76,6 +76,7 @@ export default function Home({ data }) {
     setAnim(true);
     setExpensiveAnim(true);
   }, []);
+console.log("a,nb");
 
   return (
     <>
