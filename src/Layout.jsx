@@ -5,7 +5,7 @@ import Timer from "./components/Timer";
 export default function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col items-center bg-slate-100">
-      <div className="w-full max-w-screen-2xl">
+      <div className="w-full max-w-screen-7xl">
         <Header />
         
 

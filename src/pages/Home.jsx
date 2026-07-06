@@ -87,54 +87,54 @@ export default function Home({ data }) {
         <Timer />
       </div>
 
-  
-
-
-
-
       {/* محصولات گران‌قیمت */}
       <h1 className="text-red-600 font-bold text-[30px] flex justify-end md:px-10 mb-10 text-center pr-5 md:pr-8 mt-16">
         محصولات گران قیمت
       </h1>
 
-      <div className="relative px-6 md:px-9">
-        <button
-          onClick={() => changeExpensivePage("prev")}
-          className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 bg-gray-800 text-white w-10 h-10 rounded-full"
-        >
-          ‹
-        </button>
+      <div className="relative px-6 md:px-9 ">
+        <div className="relative w-full max-w-7xl mx-auto ">
+          <button
+            onClick={() => changeExpensivePage("prev")}
+            className="absolute left-3 md:left-1 top-1/2 -translate-y-1/2 z-10 bg-gray-800 text-white w-10 h-10 rounded-full mx-auto"
+          >
+            ‹
+          </button>
 
-        <div
-          className={`
+          <div
+            className={`
+            max-w-7xl
+            w-full
+            mx-auto
             grid gap-6
             grid-cols-3 md:grid-cols-4
-            transition-all duration-500 ease-out
+            transition-all duration-500 ease-out m
             ${
               expensiveAnim
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-10"
             }
           `}
-        >
-          {visibleExpensiveProducts.map((item) => (
-            <Products
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              description={item.description}
-            />
-          ))}
-        </div>
+          >
+            {visibleExpensiveProducts.map((item) => (
+              <Products
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                description={item.description}
+              />
+            ))}
+          </div>
 
-        <button
-          onClick={() => changeExpensivePage("next")}
-          className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-gray-800 text-white w-10 h-10 rounded-full"
-        >
-          ›
-        </button>
+          <button
+            onClick={() => changeExpensivePage("next")}
+            className="absolute right-3 md:right-1 top-1/2 -translate-y-1/2 z-10 bg-gray-800 text-white w-10 h-10 rounded-full "
+          >
+            ›
+          </button>
+        </div>
       </div>
     </>
   );

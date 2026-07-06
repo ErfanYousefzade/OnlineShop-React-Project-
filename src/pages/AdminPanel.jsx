@@ -345,7 +345,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="max-w-xl">
+    <div className="max-w-7xl">
       <div className="rounded-2xl p-5 sm:p-6" style={{ background: "#1b2230", border: "1px solid #2a3140" }}>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
           <div className="flex items-center gap-4">

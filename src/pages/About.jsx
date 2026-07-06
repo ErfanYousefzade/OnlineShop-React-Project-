@@ -31,7 +31,7 @@ export default function About() {
           وقت برایشان طلاست
         </h1>
 
-        <p className="text-gray-500 mt-8 max-w-2xl leading-8 text-lg">
+        <p className="text-gray-500 mt-8 max-w-xl leading-8 text-lg">
           ما از یک مشکل واقعی شروع کردیم — ابزارهای پیچیده‌ای که بیشتر از اینکه
           کمک کنند، وقت می‌گرفتند. هدفمان ساختن محصولی بود که از روز اول با تیم
           شما کار کند؛ بدون پیکربندی دردسرساز و بدون یادگیری طولانی.

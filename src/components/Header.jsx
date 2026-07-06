@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-slate-900 text-white shadow-lg border-b border-slate-700 relative">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-4">
         {/* ================= DESKTOP ================= */}
         <nav className="hidden md:flex h-16 items-center justify-between">
           {/* LEFT */}
