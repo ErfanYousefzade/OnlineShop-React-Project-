@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../Contexts/CartContext";
+import useCart from "../Stores/useCart";
 
 export default function Products({
   title,
@@ -10,7 +11,8 @@ export default function Products({
   description,
   category,
 }) {
-  const { cart, Dispatch } = useContext(CartContext);
+
+  const {cart,add,remove} =useCart()
   const [displayNumber, setDisplayNumber] = useState(0);
 
   useEffect(() => {
@@ -100,10 +102,9 @@ export default function Products({
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    Dispatch({
-                      type: "decrease",
-                      payload: +id,
-                    });
+                    remove(+id)
+
+                    
                   }}
                   className="
                     w-8 h-8
@@ -126,10 +127,8 @@ export default function Products({
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    Dispatch({
-                      type: "add",
-                      payload: +id,
-                    });
+                    add(+id)
+
                   }}
                   className="
                     w-8 h-8
@@ -149,10 +148,8 @@ export default function Products({
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  Dispatch({
-                    type: "add",
-                    payload: +id,
-                  });
+                  add(+id)
+
                 }}
                 className="
                   w-full

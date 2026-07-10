@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
+import useCart from "../Stores/useCart";
 
 export default function SingelProduct() {
   const [data, setData] = useState({});
@@ -11,7 +12,8 @@ export default function SingelProduct() {
   const [shareCopied, setShareCopied] = useState(false);
 
   const { id } = useParams();
-  const { cart, Dispatch } = useContext(CartContext);
+ 
+  const {cart,add,remove} = useCart()
   const [displaynumber, SetDisplaynumber] = useState(0);
 
   // fetch main product
@@ -224,7 +226,7 @@ export default function SingelProduct() {
                     <button
                       aria-label="کاهش تعداد"
                       onClick={() =>
-                        Dispatch({ type: "decrease", payload: +id })
+                        remove(+id)
                       }
                       className="w-11 h-12 grid place-items-center text-lg text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm"
                     >
@@ -236,7 +238,7 @@ export default function SingelProduct() {
                     <button
                       aria-label="افزایش تعداد"
                       disabled={!inStock}
-                      onClick={() => Dispatch({ type: "add", payload: +id })}
+                      onClick={() => add(id)}
                       className="w-11 h-12 grid place-items-center text-lg text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm disabled:opacity-30"
                     >
                       +
@@ -249,7 +251,7 @@ export default function SingelProduct() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     disabled={!inStock}
-                    onClick={() => Dispatch({ type: "add", payload: +id })}
+                    onClick={() => add(+id)}
                     className="flex-1 bg-[#1A1A1A] text-white py-3.5 rounded-sm font-semibold tracking-wide hover:bg-[#C1440E] active:scale-[0.98] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] disabled:opacity-30 disabled:hover:bg-[#1A1A1A]"
                   >
                     {inStock ? "افزودن به سبد خرید" : "ناموجود"}

@@ -1,10 +1,11 @@
 import { useMemo, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
+import useCart from "../Stores/useCart";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { cart } = useContext(CartContext);
+  const { cart } = useCart();
 
   const sum = useMemo(() => {
     return cart.reduce((acc, cur) => acc + cur.quantity, 0);

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Products from "../components/Products";
+import useCart from "../Stores/useCart";
 
 export default function CartItem() {
-  const { cart, Dispatch } = useContext(CartContext);
+
+  const {cart,add,remove,clear,removepack}=useCart()
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -145,7 +147,7 @@ export default function CartItem() {
                     <button
                       aria-label="کاهش تعداد"
                       onClick={() =>
-                        Dispatch({ type: "decrease", payload: +item.id })
+                        remove(+item.id)
                       }
                       className="w-9 h-9 grid place-items-center text-base text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm"
                     >
@@ -157,7 +159,7 @@ export default function CartItem() {
                     <button
                       aria-label="افزایش تعداد"
                       onClick={() =>
-                        Dispatch({ type: "add", payload: +item.id })
+                        add(+item.id)
                       }
                       className="w-9 h-9 grid place-items-center text-base text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm"
                     >
@@ -174,7 +176,7 @@ export default function CartItem() {
                   <button
                     aria-label="حذف از سبد خرید"
                     onClick={() =>
-                      Dispatch({ type: "remove", payload: +item.id })
+                     removepack(+item.id)
                     }
                     className="shrink-0 w-9 h-9 grid place-items-center text-[#1A1A1A]/40 hover:text-[#C1440E] hover:bg-[#FAFAF8] rounded-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E]"
                   >
@@ -249,7 +251,7 @@ export default function CartItem() {
               
 
               <button
-                onClick={() => Dispatch({ type: "clear" })}
+                onClick={clear}
                 className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-[#1A1A1A]/50 hover:text-[#C1440E] py-2.5 rounded-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E]"
               >
                 <TrashIcon size={15} />
