@@ -89,9 +89,7 @@ export default function Products({
                 ${finalPrice}
               </p>
 
-              <span className="self-start sm:self-auto text-[10px] sm:text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold whitespace-nowrap">
-                Save 10%
-              </span>
+
             </div>
           </div>
 

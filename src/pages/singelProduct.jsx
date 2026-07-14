@@ -238,7 +238,7 @@ export default function SingelProduct() {
                     <button
                       aria-label="افزایش تعداد"
                       disabled={!inStock}
-                      onClick={() => add(id)}
+                      onClick={() => add(+id)}
                       className="w-11 h-12 grid place-items-center text-lg text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm disabled:opacity-30"
                     >
                       +

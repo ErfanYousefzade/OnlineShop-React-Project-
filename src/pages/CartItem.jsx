@@ -6,12 +6,10 @@ import Products from "../components/Products";
 import useCart from "../Stores/useCart";
 
 export default function CartItem() {
-
-  const {cart,add,remove,clear,removepack}=useCart()
+  const { cart, add, remove, clear, removepack } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // گرفتن محصولات از API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -21,7 +19,6 @@ export default function CartItem() {
       });
   }, []);
 
-  // ترکیب Cart با محصولات کامل
   const cartProducts = cart
     .map((cartItem) => {
       const product = products.find((p) => p.id === cartItem.id);
@@ -42,21 +39,26 @@ export default function CartItem() {
   const total = subtotal - discount + shipping;
   const itemCount = cartProducts.reduce((n, item) => n + item.quantity, 0);
 
-  // اگر سبد خالی بود
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-[#FAFAF8] flex flex-col items-center justify-center px-4 text-center">
-        <EmptyCartIcon />
-        <h1 className="mt-6 text-xl font-semibold text-[#1A1A1A]">
+      <div className="min-h-screen bg-[#F8F6F3] flex flex-col items-center justify-center px-4 text-center">
+        <div className="relative">
+          <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-[#E8D5C4] to-[#F0E6D3] rounded-full flex items-center justify-center">
+            <span className="text-6xl md:text-7xl opacity-60">🛒</span>
+          </div>
+          <div className="absolute -top-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-[#C4A882] rounded-full flex items-center justify-center text-white text-xs md:text-sm font-light">
+            0
+          </div>
+        </div>
+        <h1 className="mt-6 md:mt-8 text-xl md:text-2xl font-light text-[#2D2A24] tracking-wide">
           سبد خرید شما خالی است
         </h1>
-        <p className="mt-2 text-sm text-[#1A1A1A]/50 max-w-xs">
-          هنوز چیزی به سبد خرید اضافه نکرده‌اید. وقتشه چیزی پیدا کنید که دوست
-          دارید.
+        <p className="mt-2 md:mt-3 text-xs md:text-sm text-[#A89F94] max-w-sm leading-relaxed">
+          برای شروع خرید، محصولات مورد علاقه‌تان را مرور کنید.
         </p>
         <Link
           to="/Products"
-          className="mt-6 bg-[#1A1A1A] text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-[#C1440E] transition"
+          className="mt-6 md:mt-8 px-8 md:px-10 py-3 md:py-3.5 bg-[#2D2A24] text-[#F8F6F3] text-xs md:text-sm font-light tracking-wide hover:bg-[#C4A882] transition-all duration-300"
         >
           مشاهده محصولات
         </Link>
@@ -66,11 +68,11 @@ export default function CartItem() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAF8]">
-        <div className="flex items-center gap-3 text-[#1A1A1A]/60">
-          <span className="w-2 h-2 rounded-full bg-[#C1440E] animate-pulse" />
-          <span className="text-sm tracking-wide">
-            در حال بارگذاری سبد خرید…
+      <div className="min-h-screen bg-[#F8F6F3] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 md:w-10 md:h-10 border border-[#C4A882] rounded-full animate-spin border-t-[#2D2A24]"></div>
+          <span className="text-xs md:text-sm text-[#A89F94] font-light">
+            بارگذاری...
           </span>
         </div>
       </div>
@@ -78,239 +80,266 @@ export default function CartItem() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-[#1A1A1A]">
-      <div className="max-w-6xl mx-auto px-5 md:px-8 py-8">
+    <div className="min-h-screen bg-[#F8F6F3]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-6 md:py-10">
         {/* HEADER */}
-        <div className="flex items-center justify-between mb-2">
-          <h1
-            className="text-3xl font-semibold"
-            style={{ fontFamily: "'Georgia', 'Vazirmatn', serif" }}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#E8E0D8] pb-4 md:pb-6 mb-6 md:mb-10 gap-3">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-light text-[#2D2A24] tracking-wide">
+              سبد خرید
+            </h1>
+            <p className="text-xs md:text-sm text-[#A89F94] mt-1 font-light">
+              {itemCount} کالا در سبد شما
+            </p>
+          </div>
+          <Link
+            to="/Products"
+            className="text-xs md:text-sm text-[#A89F94] hover:text-[#2D2A24] transition-colors font-light flex items-center gap-1 md:gap-2 shrink-0"
           >
-            سبد خرید
-          </h1>
-          <span className="text-sm text-[#1A1A1A]/50">
-            {itemCount} {itemCount === 1 ? "کالا" : "کالا"}
-          </span>
+            <span>ادامه خرید</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="md:w-4 md:h-4"
+            >
+              <path
+                d="M5 12h14M12 5l7 7-7 7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
 
-        {/* perforated divider */}
-        <div
-          className="mt-4 mb-8 h-px w-full"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(to right, #D8D5CC 0, #D8D5CC 6px, transparent 6px, transparent 12px)",
-          }}
-        />
-
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-10">
           {/* ============ ITEM LIST ============ */}
-          <div className="md:col-span-2 flex flex-col gap-4">
+          <div className="lg:col-span-2 space-y-3 md:space-y-4">
             <AnimatePresence initial={false}>
               {cartProducts.map((item) => (
                 <motion.div
                   key={item.id}
                   layout
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -20, transition: { duration: 0.25 } }}
-                  className="bg-white border border-[#E8E6E0] rounded-sm p-4 flex gap-4 items-center"
+                  exit={{ opacity: 0, x: -30 }}
+                  className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-3 md:p-5 flex items-center gap-3 md:gap-6 border border-[#F0EAE3]"
                 >
                   {/* image */}
                   <Link
                     to={`/single-product/${item.id}`}
-                    className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-[#FAFAF8] border border-[#E8E6E0] rounded-sm grid place-items-center overflow-hidden"
+                    className="shrink-0 w-16 h-16 md:w-20 md:h-20 bg-[#F8F6F3] rounded-lg grid place-items-center overflow-hidden"
                   >
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="max-h-[80%] max-w-[80%] object-contain"
+                      className="max-h-[70%] max-w-[70%] object-contain opacity-80"
                     />
                   </Link>
 
-                  {/* title + price */}
+                  {/* info */}
                   <div className="flex-1 min-w-0">
-                    <Link to={`/product/${item.id}`}>
-                      <h2 className="font-medium text-sm md:text-base text-[#1A1A1A] line-clamp-2 hover:text-[#C1440E] transition">
+                    <Link to={`/single-product/${item.id}`}>
+                      <h2 className="text-sm md:text-base font-light text-[#2D2A24] line-clamp-1 hover:text-[#C4A882] transition-colors">
                         {item.title}
                       </h2>
                     </Link>
-                    <p className="mt-1 text-xs text-[#1A1A1A]/40 capitalize">
-                      {item.category}
-                    </p>
-                    <p className="mt-2 font-bold text-[#1A1A1A]">
-                      ${item.price.toFixed(2)}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-2 md:gap-3 mt-1">
+                      <span className="text-[10px] md:text-xs text-[#A89F94] bg-[#F8F6F3] px-2 md:px-2.5 py-0.5 rounded">
+                        {item.category}
+                      </span>
+                      <span className="text-xs md:text-sm font-light text-[#2D2A24]">
+                        ${item.price.toFixed(2)}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* quantity stepper */}
-                  <div className="flex items-center bg-[#FAFAF8] border border-[#E8E6E0] rounded-sm">
-                    <button
-                      aria-label="کاهش تعداد"
-                      onClick={() =>
-                        remove(+item.id)
-                      }
-                      className="w-9 h-9 grid place-items-center text-base text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm"
-                    >
-                      −
-                    </button>
-                    <span className="w-7 text-center font-semibold text-sm">
-                      {item.quantity}
+                  {/* quantity controls - responsive */}
+                  <div className="flex items-center gap-2 md:gap-4 shrink-0">
+                    <div className="flex items-center border border-[#E8E0D8] rounded">
+                      <button
+                        onClick={() => remove(+item.id)}
+                        className="w-6 h-6 md:w-8 md:h-8 grid place-items-center text-[#A89F94] hover:text-[#2D2A24] transition-colors text-base md:text-lg font-light"
+                      >
+                        −
+                      </button>
+                      <span className="w-6 md:w-8 text-center text-xs md:text-sm font-light text-[#2D2A24]">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => add(+item.id)}
+                        className="w-6 h-6 md:w-8 md:h-8 grid place-items-center text-[#A89F94] hover:text-[#2D2A24] transition-colors text-base md:text-lg font-light"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <span className="text-xs md:text-sm font-light text-[#2D2A24] min-w-[50px] md:min-w-[70px] text-right hidden sm:block">
+                      ${(item.price * item.quantity).toFixed(2)}
                     </span>
+
                     <button
-                      aria-label="افزایش تعداد"
-                      onClick={() =>
-                        add(+item.id)
-                      }
-                      className="w-9 h-9 grid place-items-center text-base text-[#1A1A1A]/70 hover:text-[#C1440E] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E] rounded-sm"
+                      onClick={() => removepack(+item.id)}
+                      className="text-[#D4CBC2] hover:text-[#C4A882] transition-colors"
                     >
-                      +
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        className="md:w-4 md:h-4"
+                      >
+                        <path d="M3 6h18" strokeLinecap="round" />
+                        <path
+                          d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </button>
                   </div>
-
-                  {/* line total (desktop) */}
-                  <p className="hidden md:block w-20 text-right font-semibold text-sm shrink-0">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </p>
-
-                  {/* delete */}
-                  <button
-                    aria-label="حذف از سبد خرید"
-                    onClick={() =>
-                     removepack(+item.id)
-                    }
-                    className="shrink-0 w-9 h-9 grid place-items-center text-[#1A1A1A]/40 hover:text-[#C1440E] hover:bg-[#FAFAF8] rounded-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E]"
-                  >
-                    <TrashIcon />
-                  </button>
                 </motion.div>
               ))}
             </AnimatePresence>
-
-            <Link
-              to="/Products"
-              className="mt-2 inline-flex items-center gap-2 text-sm text-[#1A1A1A]/60 hover:text-[#C1440E] transition w-fit"
-            >
-              <span aria-hidden>←</span> ادامه خرید
-            </Link>
           </div>
 
           {/* ============ ORDER SUMMARY ============ */}
-          <div className="md:col-span-1">
-            <div className="bg-white border border-[#E8E6E0] rounded-sm p-6 sticky top-8">
-              <h2 className="text-lg font-semibold mb-4">خلاصه سفارش</h2>
-
-              <dl className="text-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <dt className="text-[#1A1A1A]/55">
-                    جمع جزء ({itemCount} کالا)
-                  </dt>
-                  <dd className="font-medium">${subtotal.toFixed(2)}</dd>
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <div className="bg-white rounded-lg shadow-sm p-5 md:p-7 border border-[#F0EAE3]">
+                <div className="flex items-center gap-3 mb-6 md:mb-7">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-[#F8F6F3] rounded-full flex items-center justify-center text-[#2D2A24] font-light text-base md:text-lg">
+                    {itemCount}
+                  </div>
+                  <div>
+                    <h2 className="text-sm md:text-base font-light text-[#2D2A24]">
+                      خلاصه سفارش
+                    </h2>
+                    <p className="text-[10px] md:text-xs text-[#A89F94] font-light">
+                      جزئیات پرداخت
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-[#1A1A1A]/55">تخفیف (۱۰٪)</dt>
-                  <dd className="font-medium text-[#1F7A4D]">
-                    −${discount.toFixed(2)}
-                  </dd>
+
+                <dl className="space-y-2 md:space-y-3 text-xs md:text-sm">
+                  <div className="flex justify-between py-1.5 md:py-2 border-b border-[#F0EAE3]">
+                    <dt className="text-[#A89F94] font-light">جمع جزء</dt>
+                    <dd className="font-light text-[#2D2A24]">
+                      ${subtotal.toFixed(2)}
+                    </dd>
+                  </div>
+                  <div className="flex justify-between py-1.5 md:py-2 border-b border-[#F0EAE3]">
+                    <dt className="text-[#A89F94] font-light">تخفیف</dt>
+                    <dd className="font-light text-[#C4A882]">
+                      −${discount.toFixed(2)}
+                    </dd>
+                  </div>
+                  <div className="flex justify-between py-1.5 md:py-2 border-b border-[#F0EAE3]">
+                    <dt className="text-[#A89F94] font-light">هزینه ارسال</dt>
+                    <dd className="font-light">
+                      {shipping === 0 ? (
+                        <span className="text-[#C4A882]">رایگان</span>
+                      ) : (
+                        `$${shipping.toFixed(2)}`
+                      )}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="mt-4 md:mt-5 pt-4 md:pt-5 border-t-2 border-[#F0EAE3]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs md:text-sm font-light text-[#A89F94]">
+                      جمع کل
+                    </span>
+                    <span className="text-xl md:text-2xl font-light text-[#2D2A24] tracking-wide">
+                      ${total.toFixed(2)}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-[#1A1A1A]/55">هزینه ارسال</dt>
-                  <dd className="font-medium">
-                    {shipping === 0 ? (
-                      <span className="text-[#1F7A4D]">رایگان</span>
-                    ) : (
-                      `$${shipping.toFixed(2)}`
-                    )}
-                  </dd>
-                </div>
-              </dl>
 
-              {/* dashed divider */}
-              <div
-                className="my-4 h-px w-full"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(to right, #D8D5CC 0, #D8D5CC 6px, transparent 6px, transparent 12px)",
-                }}
-              />
+                {shipping > 0 && (
+                  <p className="mt-3 md:mt-4 text-[10px] md:text-xs text-[#A89F94] text-center font-light">
+                    ${(50 - (subtotal - discount)).toFixed(2)} تا ارسال رایگان
+                  </p>
+                )}
 
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-base">جمع کل</span>
-                <span className="font-bold text-xl">${total.toFixed(2)}</span>
-              </div>
-
-              {shipping > 0 && (
-                <p className="mt-3 text-xs text-[#1A1A1A]/45 leading-relaxed">
-                  با ${(50 - (subtotal - discount)).toFixed(2)} خرید بیشتر،
-                  ارسال رایگان می‌شود.
-                </p>
-              )}
-              
-                <button className="mt-5 w-full bg-[#1A1A1A] text-white py-3.5 rounded-sm font-semibold tracking-wide hover:bg-[#C1440E] active:scale-[0.98] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E]">
+                <button className="w-full mt-5 md:mt-6 bg-[#2D2A24] text-[#F8F6F3] py-3 md:py-3.5 text-xs md:text-sm font-light tracking-wide hover:bg-[#C4A882] transition-all duration-300">
                   ادامه فرایند خرید
                 </button>
-              
 
-              <button
-                onClick={clear}
-                className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-[#1A1A1A]/50 hover:text-[#C1440E] py-2.5 rounded-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C1440E]"
-              >
-                <TrashIcon size={15} />
-                پاک کردن سبد
-              </button>
+                <button
+                  onClick={clear}
+                  className="w-full mt-2 md:mt-3 text-[10px] md:text-xs text-[#A89F94] hover:text-[#2D2A24] py-1.5 md:py-2 transition-colors font-light"
+                >
+                  پاک کردن سبد خرید
+                </button>
+              </div>
+
+              {/* trust badges */}
+              <div className="mt-4 md:mt-5 flex flex-wrap justify-center gap-4 md:gap-6 text-[10px] md:text-xs text-[#A89F94] font-light">
+                <span className="flex items-center gap-1 md:gap-1.5">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="md:w-3.5 md:h-3.5"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path
+                      d="M9 12l2 2 4-4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  پرداخت امن
+                </span>
+                <span className="hidden sm:block w-px h-4 bg-[#E8E0D8]"></span>
+                <span className="flex items-center gap-1 md:gap-1.5">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="md:w-3.5 md:h-3.5"
+                  >
+                    <path d="M20 12H4M12 4v16" strokeLinecap="round" />
+                  </svg>
+                  ضمانت بازگشت
+                </span>
+                <span className="hidden sm:block w-px h-4 bg-[#E8E0D8]"></span>
+                <span className="flex items-center gap-1 md:gap-1.5">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="md:w-3.5 md:h-3.5"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  ارسال سریع
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-}
-
-/* ---------- inline icons ---------- */
-
-function TrashIcon({ size = 18 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path d="M4 7h16" strokeLinecap="round" />
-      <path
-        d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M10 11v6M14 11v6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function EmptyCartIcon() {
-  return (
-    <svg
-      width="64"
-      height="64"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#1A1A1A"
-      strokeOpacity="0.25"
-      strokeWidth="1.4"
-    >
-      <circle cx="9" cy="20" r="1.4" />
-      <circle cx="17" cy="20" r="1.4" />
-      <path
-        d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.3h8.2a1.5 1.5 0 0 0 1.5-1.2L20 8H6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

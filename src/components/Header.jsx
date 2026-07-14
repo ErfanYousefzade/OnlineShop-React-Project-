@@ -20,11 +20,12 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <Link
               to="/CartItem"
-              className="relative px-4 py-2 rounded-lg hover:bg-slate-700 transition"
+              className="relative flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition"
             >
-              Cart
+              🛒
+              <span>Cart</span>
               {sum > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-600 text-xs px-2 py-0.5 rounded-full">
+                <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-[11px] font-bold">
                   {sum}
                 </span>
               )}
@@ -32,7 +33,7 @@ export default function Header() {
 
             <Link
               to="/Admin"
-              className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700 transition"
+              className="px-5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 hover:scale-105 hover:shadow-lg transition duration-300"
             >
               Admin
             </Link>
@@ -53,17 +54,22 @@ export default function Header() {
               </li>
               <li>
                 <Link to="/Helps">
-                  <a href="#" className="hover:text-blue-400 transition">
-                    Helps
-                  </a>
+                  <div className="hover:text-blue-400 transition">Helps</div>
                 </Link>
               </li>
             </ul>
 
             {/* ICON */}
             <Link to="/">
-              <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold">
-                E
+              <div className="flex items-center gap-3 group">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center font-bold text-lg shadow-lg group-hover:rotate-6 transition duration-300">
+                  E
+                </div>
+
+                <div className="leading-4">
+                  <h2 className="font-bold tracking-wide">EYour Shop</h2>
+                  <p className="text-xs text-slate-400">Premium Store</p>
+                </div>
               </div>
             </Link>
           </div>
@@ -74,10 +80,11 @@ export default function Header() {
           <button onClick={() => setOpen(!open)} className="text-2xl z-20">
             {open ? "✕" : "☰"}
           </button>
-
-          <h1 className="absolute left-1/2 -translate-x-1/2 font-bold text-lg whitespace-nowrap">
-            EYour Shop
-          </h1>
+          <Link to="/">
+            <h1 className="absolute left-1/2 -translate-x-1/2 font-bold text-lg whitespace-nowrap mt-[-15px]">
+              EYour Shop
+            </h1>
+          </Link>
 
           <div className="flex items-center gap-3 text-sm">
             <Link to="/CartItem" className="relative  py-1">
@@ -107,7 +114,7 @@ export default function Header() {
               <Link to="/About">About</Link>
             </li>
             <li>
-              <a href="#">Helps</a>
+              <Link to="/Helps">Helps</Link>
             </li>
           </ul>
         </div>

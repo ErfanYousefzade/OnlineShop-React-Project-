@@ -3,34 +3,38 @@ export default function MyReducer(state, action) {
 
   switch (action.type) {
     case "add":
-      foundIndex = state.findIndex((item) => item.id === action.payload);
-      if (foundIndex === -1) {
-        return [...state, { id: action.payload, quantity: 1 }];
-      } else {
-        return state.map((item) =>
-          item.id === action.payload
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
+      foundIndex = state.find(item => item.id ===action.payload)
+      if (foundIndex){
+        return state.map(item => item.id === action.payload ?
+          {...item,quantity:item.quantity+1} :
+          item
+        )
+      
       }
-      break;
+      else{
+        return[...state,{id: action.payload,quantity:1}]
+     
+      }
+
 
     case "decrease":
-      foundIndex = state.findIndex((item) => item.id === action.payload);
-
-      if (foundIndex === -1) {
-        return state;
-      } else {
-        if (state[foundIndex].quantity > 1) {
-          return state.map((item, index) =>
-            index === foundIndex
-              ? { ...item, quantity: item.quantity - 1 }
-              : item,
-          );
-        } else {
-          return state.filter((item) => item.id !== action.payload);
+      foundIndex = state.find((item) => item.id === action.payload);
+      if (!foundIndex){
+        return state
+      }
+      else{
+        if (foundIndex.quantity>1){
+          return state.map(item => item.id === action.payload ?
+            {...item,quantity:item.quantity-1} :
+            item
+          )
+        
+        }
+        else{
+          return state.filter(item => item.id!=action.payload)
         }
       }
+
 
     case "clear":
       return [];
